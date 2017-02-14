@@ -16,6 +16,7 @@ var NetflixSelector = React.createClass({
     });
     return (
       <select id="films" value={this.state.selectedIndex} onChange={this.handleChange}>
+      <option>Select a Film</option>
         {options}
       </select>
     );

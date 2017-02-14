@@ -2,23 +2,37 @@ var React = require('react');
 var NetflixSelector = require('../components/NetflixSelector.jsx');
 var NetflixDetail = require('../components/NetflixDetail.jsx');
 
+var url;
+
 var NetflixContainer = React.createClass({
   getInitialState: function () {
     return { films: [], focusFilm: null };
   },
 
+
+
   componentDidMount: function(callback) {
-    var url = "http://netflixroulette.net/api/api.php?director=Quentin%20Tarantino";
-    var request = new XMLHttpRequest();
-    request.open('GET', url);
-    request.onload = function() {
-      if (request.status !== 200){
-        return;
-      }
-      var data = JSON.parse(request.responseText);
-      this.setState({ films : data });      
+    var button = document.querySelector("button");
+    var searchBox = document.querySelector("#search-box");
+    // var self = this;
+    button.onclick = function() {
+      var url = "http://netflixroulette.net/api/api.php?director=";
+      var splitString = searchBox.value.split(" ");
+      var joinedString = splitString.join("%20");
+      console.log(url + joinedString);
+      var newUrl = url + joinedString;
+      var request = new XMLHttpRequest();
+      request.open('GET', newUrl);
+      request.onload = function() {
+        if (request.status !== 200){
+          return;
+        }
+        var data = JSON.parse(request.responseText);
+        console.log(data);
+        this.setState({ films : data });      
+      }.bind(this);
+      request.send();
     }.bind(this);
-    request.send();
   },
 
   setFocusFilm: function(film) {
@@ -28,7 +42,8 @@ var NetflixContainer = React.createClass({
   render: function () {
     return (
       <div>
-      <h2>Netflix Container</h2>
+      <input type="text" id="search-box"></input>
+      <button type="submit">Search!</button>
       <NetflixSelector films={this.state.films} selectFilm={this.setFocusFilm}/>
       <NetflixDetail film={this.state.focusFilm}/>
       </div>
