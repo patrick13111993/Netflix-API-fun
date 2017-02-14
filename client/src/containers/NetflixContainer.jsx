@@ -29,7 +29,12 @@ var NetflixContainer = React.createClass({
         }
         var data = JSON.parse(request.responseText);
         console.log(data);
-        this.setState({ films : data });      
+        for (var film of data) {
+          parseInt(film.rating);
+        film.rating*=20;
+        }  
+        this.setState({ films : data });
+
       }.bind(this);
       request.send();
     }.bind(this);

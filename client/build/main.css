@@ -4,7 +4,7 @@ body{
   background-color: #EE3424;
   font-family: Verdana;
   align-items: center;
-  margin: 35%;
+  margin: 37%;
   margin-top: 0%;
 }
 
@@ -12,4 +12,19 @@ h3{
   border: 1px;
   font-size: 14px;
   color: white;
+}
+
+.rating_bar {
+    width: 160px;
+    height: 32px;
+    background: url(/images/stars.png);
+    background-repeat: repeat-x;
+    background-position: 0 0;
+    text-align: left;
+}
+.rating {
+    height: 32px;
+    background: url(/images/stars.png);
+    background-position: 0 -16px;
+    background-repeat: repeat-x;
 }
